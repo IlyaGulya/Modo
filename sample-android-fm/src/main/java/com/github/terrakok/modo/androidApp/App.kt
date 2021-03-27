@@ -5,11 +5,18 @@ import com.github.terrakok.modo.Modo
 import com.github.terrakok.modo.MultiReducer
 import com.github.terrakok.modo.android.AppReducer
 import com.github.terrakok.modo.android.LogReducer
+import com.github.terrakok.modo.androidApp.deeplink.DeeplinkDirectStateModifyingReducer
 
 class App : Application() {
 
     override fun onCreate() {
-        modo = Modo(LogReducer(AppReducer(this, MultiReducer())))
+        modo = Modo(
+            LogReducer(
+                DeeplinkDirectStateModifyingReducer(
+                    AppReducer(this, MultiReducer())
+                )
+            )
+        )
         super.onCreate()
     }
 

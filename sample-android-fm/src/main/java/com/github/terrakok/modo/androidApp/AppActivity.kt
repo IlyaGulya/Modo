@@ -1,5 +1,6 @@
 package com.github.terrakok.modo.androidApp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.github.terrakok.modo.android.ModoRender
 import com.github.terrakok.modo.android.init
 import com.github.terrakok.modo.android.multi.TabViewFactory
 import com.github.terrakok.modo.android.saveState
+import com.github.terrakok.modo.androidApp.deeplink.Deeplink
 
 class AppActivity : AppCompatActivity(), TabViewFactory {
     private val modo = App.modo
@@ -55,6 +57,21 @@ class AppActivity : AppCompatActivity(), TabViewFactory {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         modo.init(savedInstanceState, Screens.Start())
+        maybeHandleDeeplink(intent)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        maybeHandleDeeplink(intent)
+    }
+
+    private fun maybeHandleDeeplink(intent: Intent) {
+        val data = intent.data
+        if (intent.action == Intent.ACTION_VIEW &&
+            data != null
+        ) {
+            modo.dispatch(Deeplink(data))
+        }
     }
 
     override fun onResume() {

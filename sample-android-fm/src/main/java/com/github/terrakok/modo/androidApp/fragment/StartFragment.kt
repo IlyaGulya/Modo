@@ -17,6 +17,9 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         view.findViewById<View>(R.id.commandsButton).setOnClickListener {
             modo.forward(Screens.Commands(1))
         }
+        view.findViewById<View>(R.id.deeplinksButton).setOnClickListener {
+            modo.forward(Screens.Commands(1))
+        }
         view.findViewById<View>(R.id.multiButton).setOnClickListener {
             modo.forward(Screens.MultiStack())
         }

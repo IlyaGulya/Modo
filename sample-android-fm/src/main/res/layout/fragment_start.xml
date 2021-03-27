@@ -4,59 +4,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.helper.widget.Flow
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="32dp"
+        app:constraint_referenced_ids="commandsButton, deeplinksButton, multiButton, flowButton, githubButton"
+        app:flow_horizontalAlign="center"
+        app:flow_maxElementsWrap="1"
+        app:flow_verticalGap="16dp"
+        app:flow_verticalStyle="packed"
+        app:flow_wrapMode="chain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/commandsButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="Navigation commands"
-        app:layout_constraintBottom_toTopOf="@+id/multiButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        android:text="Navigation commands" />
+
+    <Button
+        android:id="@+id/deeplinksButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Deeplinks" />
 
     <Button
         android:id="@+id/multiButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
-        android:text="Multistack navigation"
-        app:layout_constraintBottom_toTopOf="@+id/flowButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commandsButton" />
+        android:text="Multistack navigation" />
 
     <Button
         android:id="@+id/flowButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
-        android:text="Flow navigation"
-        app:layout_constraintBottom_toTopOf="@+id/githubButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/multiButton" />
+        android:text="Flow navigation" />
 
     <Button
         android:id="@+id/githubButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="GitHub page"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flowButton" />
+        android:text="GitHub page" />
 </androidx.constraintlayout.widget.ConstraintLayout>

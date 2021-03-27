@@ -20,12 +20,12 @@ abstract class AppScreen(
 
 fun MultiAppScreen(
     id: String,
-    roots: List<AppScreen>,
+    stacks: List<NavigationState>,
     selected: Int
 ) = MultiScreen(
-    id,
-    List(roots.size) { i -> NavigationState(listOf(roots[i])) },
-    selected
+    id = id,
+    stacks = stacks,
+    selectedStack = selected
 )
 
 fun FlowAppScreen(
