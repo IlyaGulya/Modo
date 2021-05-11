@@ -19,30 +19,36 @@ class DeeplinkDirectStateModifyingReducer(
 
     private fun handleDeeplink(action: Deeplink, state: NavigationState): NavigationState {
         val uri = action.uri
-        val path = uri.pathSegments.toMutableList()
-        if (uri.host == "multi") {
-            val hasPath = path.isNotEmpty()
-            if (hasPath) {
-                val tabId = path.removeAt(0).toInt()
-                val screensInsideTab = path.map { Screens.Tab(tabId, it.toInt()) }
-                return NavigationState(chain = sequence {
-                    yield(Screens.Start())
-
-                    yield(
-                        Screens.MultiStack(
-                            Screens.TabState(
-                                tabId,
-                                NavigationState(screensInsideTab)
-                            )
-                        )
-                    )
-                }.toList())
-            } else {
-                return state
-            }
-        } else {
-            return state
+        return when (uri.host) {
+            "multi" -> handleMultiStackDeeplink(uri, state)
+            else -> state
         }
+    }
+
+    private fun handleMultiStackDeeplink(
+        uri: Uri,
+        state: NavigationState,
+    ): NavigationState {
+        val path = uri.pathSegments.toMutableList()
+        val hasPath = path.isNotEmpty()
+        if (path.isEmpty()) return state
+
+        val tabId = path.removeAt(0).toInt()
+        val screensInsideTab = path.map { Screens.Tab(tabId, it.toInt()) }
+
+        return NavigationState(chain = sequence {
+            yield(Screens.Start())
+
+            yield(
+                Screens.MultiStack(
+                    Screens.TabState(
+                        tabId,
+                        NavigationState(screensInsideTab)
+                    )
+                )
+            )
+        }.toList()
+        )
     }
 
 }
